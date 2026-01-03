@@ -1,0 +1,446 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hanif Foods - Bold Takeaway Menu Design System */
+
+@layer base {
+  :root {
+    /* Restaurant Brand Colors - High Contrast */
+    --background: 0 0% 98%;
+    --foreground: 0 0% 8%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
+    
+    /* Primary: Bold Red */
+    --primary: 0 85% 45%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary: Rich Gold */
+    --secondary: 45 100% 50%;
+    --secondary-foreground: 0 0% 8%;
+    
+    /* Muted: Warm Gray */
+    --muted: 30 10% 94%;
+    --muted-foreground: 0 0% 40%;
+    
+    /* Accent: Deep Burgundy */
+    --accent: 0 70% 35%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 30 10% 88%;
+    --input: 30 10% 92%;
+    --ring: 0 85% 45%;
+
+    --radius: 1rem;
+
+    /* Restaurant-specific colors */
+    --gold: 45 100% 50%;
+    --gold-dark: 40 100% 40%;
+    --cream: 40 30% 96%;
+    --charcoal: 0 0% 15%;
+    
+    /* WhatsApp Green */
+    --whatsapp: 142 70% 45%;
+    --whatsapp-hover: 142 70% 38%;
+    
+    /* Category Colors */
+    --classic: 0 85% 45%;
+    --gold-menu: 45 100% 50%;
+    --silver-menu: 0 0% 65%;
+    --bronze-menu: 30 60% 45%;
+    --bbq: 15 90% 50%;
+    --dessert: 340 80% 55%;
+    --tandoor: 25 85% 50%;
+    
+    /* Shadows */
+    --shadow-card: 0 4px 20px -4px hsl(0 0% 0% / 0.1);
+    --shadow-button: 0 6px 20px -4px hsl(0 85% 45% / 0.4);
+    --shadow-whatsapp: 0 8px 25px -4px hsl(142 70% 45% / 0.5);
+    
+    /* Transitions */
+    --transition-fast: all 0.15s ease;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 0 0% 5%;
+    --foreground: 0 0% 95%;
+    
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+    
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+    
+    --primary: 0 80% 55%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 45 100% 55%;
+    --secondary-foreground: 0 0% 8%;
+    
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    
+    --accent: 0 65% 45%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 0 80% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Touch-friendly defaults */
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+}
+
+@layer components {
+  /* Food Card Styles */
+  .food-card {
+    @apply relative overflow-hidden rounded-2xl bg-card shadow-lg;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+  }
+  
+  .food-card:active {
+    transform: scale(0.98);
+  }
+  
+  /* Category Tab Styles */
+  .category-tab {
+    @apply px-4 py-2.5 rounded-full font-semibold text-sm whitespace-nowrap transition-all;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  
+  .category-tab.active {
+    @apply bg-primary text-primary-foreground shadow-lg;
+    box-shadow: var(--shadow-button);
+  }
+  
+  .category-tab:not(.active) {
+    @apply bg-muted text-muted-foreground;
+  }
+  
+  /* Quantity Controls */
+  .qty-btn {
+    @apply flex items-center justify-center w-11 h-11 rounded-full font-bold text-lg transition-all;
+    min-width: 44px;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  
+  .qty-btn:active {
+    transform: scale(0.9);
+  }
+  
+  /* WhatsApp Button */
+  .whatsapp-btn {
+    @apply fixed bottom-4 left-4 right-4 z-50 flex items-center justify-center gap-3 py-4 px-6 rounded-2xl font-bold text-lg text-white;
+    background-color: hsl(var(--whatsapp));
+    box-shadow: var(--shadow-whatsapp);
+    min-height: 56px;
+    transition: var(--transition-fast);
+  }
+  
+  .whatsapp-btn:active {
+    background-color: hsl(var(--whatsapp-hover));
+    transform: scale(0.98);
+  }
+  
+  /* Cart Badge */
+  .cart-badge {
+    @apply absolute -top-1.5 -right-1.5 w-6 h-6 flex items-center justify-center rounded-full bg-secondary text-secondary-foreground text-xs font-bold;
+  }
+  
+  /* Price Tag */
+  .price-tag {
+    @apply font-bold text-lg text-primary;
+  }
+  
+  /* Scrollable Categories */
+  .categories-scroll {
+    @apply flex gap-2 overflow-x-auto pb-2 px-4 -mx-4;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .categories-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Header */
+  .restaurant-header {
+    @apply sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border;
+  }
+  
+  /* Fade in animation */
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Slide up animation */
+  .slide-up {
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Cart item animation */
+  .cart-item-enter {
+    animation: cartItemEnter 0.2s ease-out;
+  }
+  
+  @keyframes cartItemEnter {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+@layer utilities {
+  /* Safe area padding for mobile */
+  .safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  .safe-top {
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+  }
+
+  /* Text shadows for overlay text */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+
+  /* Hide scrollbar utility */
+  .hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* WhatsApp Widget Custom Styling for Hanif Foods Brand */
+#whatsapp-widget-container {
+  z-index: 9999 !important;
+}
+
+#whatsapp-widget-container .whatsapp-button,
+#whatsapp-widget-container .whatsapp-btn {
+  background-color: hsl(var(--primary)) !important; /* Red color */
+  border: 2px solid hsl(var(--secondary)) !important; /* Gold border */
+  box-shadow: 0 4px 12px hsla(var(--primary), 0.4) !important;
+  transition: all 0.3s ease !important;
+}
+
+#whatsapp-widget-container .whatsapp-button:hover,
+#whatsapp-widget-container .whatsapp-btn:hover {
+  background-color: hsl(var(--primary) / 0.9) !important; /* Slightly darker red */
+  box-shadow: 0 6px 16px hsla(var(--primary), 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+#whatsapp-widget-container .whatsapp-button:active,
+#whatsapp-widget-container .whatsapp-btn:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+#whatsapp-widget-container .whatsapp-icon {
+  color: hsl(var(--secondary-foreground)) !important; /* White text for contrast */
+}
+
+#whatsapp-widget-container .whatsapp-chat-box {
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 10px 30px hsla(0, 0%, 0%, 0.15) !important;
+}
+
+#whatsapp-widget-container .whatsapp-header {
+  background-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+  border-radius: var(--radius) var(--radius) 0 0 !important;
+}
+
+#whatsapp-widget-container .whatsapp-status {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+#whatsapp-widget-container .whatsapp-message-input {
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: calc(var(--radius) - 4px) !important;
+}
+
+#whatsapp-widget-container .whatsapp-send-button {
+  background-color: hsl(var(--secondary)) !important; /* Gold color */
+  color: hsl(var(--secondary-foreground)) !important;
+}
+
+#whatsapp-widget-container .whatsapp-send-button:hover {
+  background-color: hsl(var(--secondary) / 0.9) !important;
+}
+
+#whatsapp-widget-container .whatsapp-brand-name {
+  color: hsl(var(--primary)) !important;
+  font-weight: 600 !important;
+}
+
+#whatsapp-widget-container .whatsapp-brand-status {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* Mobile Application Optimizations */
+@media (max-width: 768px) {
+  /* Ensure proper spacing on mobile */
+  .whatsapp-btn {
+    bottom: 20px !important;
+    left: 20px !important;
+    right: 20px !important;
+    width: auto !important;
+  }
+
+  /* Adjust category tabs for mobile */
+  .category-tab {
+    min-height: 50px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Optimize food cards for mobile */
+  .food-card {
+    border-radius: 1.5rem !important;
+  }
+
+  /* Ensure proper touch targets */
+  .qty-btn {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+  }
+
+  /* Optimize header for mobile */
+  .restaurant-header {
+    padding-top: env(safe-area-inset-top) !important;
+  }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 480px) {
+  .category-tab {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    font-size: 0.875rem !important;
+  }
+
+  .whatsapp-btn {
+    bottom: 16px !important;
+    left: 16px !important;
+    right: 16px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Optimize for very small screens */
+  .food-card img {
+    min-height: 180px !important;
+    object-fit: cover !important;
+  }
+}
+
+/* PWA and Mobile App Features */
+@media screen and (display-mode: standalone) {
+  .restaurant-header {
+    padding-top: env(safe-area-inset-top) !important;
+  }
+
+  body {
+    overscroll-behavior: none;
+  }
+}
+
+/* Prevent text selection during touch interactions */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Improve scroll performance on mobile */
+html {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Optimize font rendering for mobile screens */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ensure proper rendering on iOS devices */
+@supports (-webkit-touch-callout: none) {
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Poppins', sans-serif;
+  }
+}
