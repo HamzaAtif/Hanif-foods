@@ -9,10 +9,10 @@
       }
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "source": "/(.*).js",
+      "source": "/(.+).js",
       "headers": [
         {
           "key": "Cache-Control",
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "source": "/(.*).css",
+      "source": "/(.+).css",
       "headers": [
         {
           "key": "Cache-Control",
